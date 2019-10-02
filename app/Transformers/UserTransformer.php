@@ -10,7 +10,9 @@ use App\Transformers\PostTransformers;
 
 class UserTransformer extends TransformerAbstract{
 
-    protected $availableIncludes = ['posts'];
+    protected $availableIncludes = [
+        'posts'
+    ];
 
     public function transform(user $user){
         return [
@@ -21,9 +23,11 @@ class UserTransformer extends TransformerAbstract{
             'registered' => $user->created_at->diffForHumans(),
             'token' => $user->api_token
         ];
+
     }
 
-    public function includePost(User $user){
+   
+    public function includePosts(User $user){
          $posts = $user->posts;
 
          return $this->collection($posts,new PostTransformer);

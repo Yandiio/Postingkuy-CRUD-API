@@ -23,12 +23,11 @@ Route::group(['middleware' => ['api']],function(){
     Route::get('/users','UserController@Users');
     Route::post('/auth/register','AuthController@register');
     Route::post('/auth/login','AuthController@login');
-    Route::get('/profile','UserController@profile')->middleware('auth:api');
-
-    // Using route resource
+    Route::get('/users/profile','UserController@profile')->middleware('auth:api');
+    Route::get('/users/{id}','UserController@profileByid')->middleware('auth:api');
 
    Route::post('/post','IndexController@create')->middleware('auth:api');
-   Route::get('/post/recent' ,'IndexController@index');
+   Route::put('/post/{post}','IndexController@update')->middleware('auth:api');
 
 });
 

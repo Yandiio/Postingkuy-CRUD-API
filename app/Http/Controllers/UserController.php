@@ -20,11 +20,23 @@ class UserController extends Controller{
     }
 
     public function profile(User $user){
+
         $users = $user->find(Auth::user()->id);
+        
         return fractal()
             ->item($users)
             ->transformWith(new UserTransformer)
-            ->includePost()
+            ->includePosts()
+            ->toArray();
+    }
+
+    public function profileByid(User $user,$id){
+        $users = $user->find($id);
+        
+        return fractal()
+            ->item($users)
+            ->transformWith(new UserTransformer)
+            ->includePosts()
             ->toArray();
     }
 
